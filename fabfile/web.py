@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from common import Component
-from fabric import tasks
-from fabric.api import run
+from fabric.api import run, execute
 
 def service_out():
     run('echo "service out"')
@@ -15,8 +14,8 @@ def restart():
 
 class Web(Component):
     def service_out(self, hosts):
-        tasks.execute(service_out, hosts=hosts)
+        execute(service_out, hosts=hosts)
     def service_in(self, hosts):
-        tasks.execute(service_in, hosts=hosts)
+        execute(service_in, hosts=hosts)
     def restart(self, hosts):
-        tasks.execute(restart, hosts=hosts)
+        execute(restart, hosts=hosts)

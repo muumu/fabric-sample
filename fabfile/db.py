@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from common import Component
-from fabric import tasks
-from fabric.api import run
+from fabric.api import run, execute
 from functools import partial
 
 def service_out(hostname):
@@ -20,12 +19,12 @@ def backup():
 class Database(Component):
     def service_out(self, hosts):
         for host in hosts:
-            tasks.execute(partial(service_out, host), hosts=get_hosts('ap'))
+            execute(partial(service_out, host), hosts=get_hosts('ap'))
     def service_in(self, hosts):
         for host in hosts:
-            tasks.execute(partial(service_in, host), hosts=get_hosts('ap'))
+            execute(partial(service_in, host), hosts=get_hosts('ap'))
     def restart(self, hosts):
-        tasks.execute(restart, hosts=hosts)
+        execute(restart, hosts=hosts)
     def backup(self, hosts):
-        tasks.execute(backup, hosts=hosts)
+        execute(backup, hosts=hosts)
 

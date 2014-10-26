@@ -2,8 +2,7 @@
 
 import web, ap, db
 from common import get_hosts, get_role
-from fabric import tasks
-from fabric.api import sudo
+from fabric.api import sudo, execute
 from fabric.decorators import task
 from functools import partial
 
@@ -23,7 +22,7 @@ def deploy(name):
 # 任意個のデプロイをFabricタスクとして呼び出す関数
 def do_deploys(deploys, hosts):
     for d in deploys:
-        tasks.execute(partial(deploy, d), hosts=hosts)
+        execute(partial(deploy, d), hosts=hosts)
 
 # 障害時などにホスト名を指定してサービスアウトを行うタスク
 @task
